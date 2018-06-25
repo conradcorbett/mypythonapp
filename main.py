@@ -1,9 +1,13 @@
 #! /usr/bin/env python
 
+import sys
 import requests
 import ntnx
 
 def main():
+	print(sys.executable)
+	print(sys.version)
+
 	cluster_VIP, username, password = ntnx.inputvars()
 	ntnx.clusterauth(username, password)
 	base_url = ntnx.baseurl(cluster_VIP)
@@ -11,14 +15,18 @@ def main():
 
 	data = ntnx.getVMjsondata(base_url)
 
-	if menuitem == 1:
-		ntnx.listvms(data)
-	elif menuitem == 2:
-		ntnx.listvms(data)
-		ntnx.getpowerstate(data)
-	else:
-		print "nothing selected"
+	while (menuitem != 9):
+		if menuitem == 1:
+			ntnx.listvms(data)
+			menuitem = ntnx.selection()
+		elif menuitem == 2:
+			ntnx.listvms(data)
+			ntnx.getpowerstate(data)
+			menuitem = ntnx.selection()
 
+		else:
+			print "nothing selected"
+			menuitem = ntnx.selection()
 #	datavstores = ntnx.getVSTOREjsondata(base_url)
 
 if __name__ == "__main__":

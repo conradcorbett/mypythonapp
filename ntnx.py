@@ -14,6 +14,7 @@ def inputvars():
 def selection():
 	print "1) List VM's"
 	print "2) Get Powerstate of a VM"
+	print "9) Quit"
 	print "\n"
 	menuSelection = input("Please enter a selection: ")
 	print "\n"
